@@ -4,7 +4,6 @@
  *  Created on: Oct 7, 2019
  *      Author: blockjm
  */
-//Testing some sexy ass changes
 
 // Includes
 #include <stdio.h>
@@ -40,8 +39,8 @@ void main(void){
     //Local Variables
 
     // Diameter = 146mm or 0.479003 ft
-    float Diameter = 0.479003;
-    float Speed;
+    //float Diameter = 0.479003;
+    //float Speed;
 
 
     while(1){ // Main while loop
