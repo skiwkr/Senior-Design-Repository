@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS
+CG_TOOL_ROOT := C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.3.LTS
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -17,6 +17,7 @@ ORDERED_OBJS += \
 "../msp432p401r.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
+-l"C:/Users/Zach/Documents/CodeComposerWorkspace/Senior-Design-Repository/MSOE_LIB/Debug/MSOE_LIB.lib" \
 
 -include ../makefile.init
 
@@ -143,14 +144,14 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 IR_Sensor_Testing_V2.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: ARM Linker'
-	"C:/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --advice:power=all --define=__MSP432P401R__ --define=ccs -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"IR_Sensor_Testing_V2.map" --heap_size=1024 --stack_size=512 -i"C:/ccs/ccs_base/arm/include" -i"C:/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/lib" -i"C:/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="IR_Sensor_Testing_V2_linkInfo.xml" --rom_model -o "IR_Sensor_Testing_V2.out" $(ORDERED_OBJS)
+	"C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.3.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --advice:power=all --define=__MSP432P401R__ --define=ccs -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"IR_Sensor_Testing_V2.map" --heap_size=1024 --stack_size=512 -i"C:/ti/ccs920/ccs/ccs_base/arm/include" -i"C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.3.LTS/lib" -i"C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.3.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="IR_Sensor_Testing_V2_linkInfo.xml" --rom_model -o "IR_Sensor_Testing_V2.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
 IR_Sensor_Testing_V2.hex: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: ARM Hex Utility'
-	"C:/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/bin/armhex" --memwidth=8 --romwidth=8 -o "IR_Sensor_Testing_V2.hex" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.3.LTS/bin/armhex" --memwidth=8 --romwidth=8 -o "IR_Sensor_Testing_V2.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 
