@@ -1,0 +1,8 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+USER_OBJS :=
+
+LIBS := -llibc.a -l"C:/Users/blockjm/OneDrive\ -\ Milwaukee\ School\ of\ Engineering/Senior\ Year/Senior\ Design/EE_2920/MSOE_LIB/Debug/MSOE_LIB.lib"
+
