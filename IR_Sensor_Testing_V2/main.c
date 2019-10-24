@@ -17,12 +17,16 @@ void NVIC_setup(void);
 void initTimer(void);
 
 // Global Variables
+float Revolutions = 0;
+float Speed = 0;
+float RPM = 0;
+// Diameter = 146mm or 0.479003 ft
+float Diameter = 0.479003;
 
 void main(void){
 
+    WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;  //Disable Watchdog Timer
     Clock_Init_48MHz();
-    //Board Setup
-    WDT_A->CTL =0x5A80; // Stop WatchDog timer
 
     // Setup Function Calls
     pin_setup();
@@ -38,23 +42,10 @@ void main(void){
 
     //Local Variables
 
-    // Diameter = 146mm or 0.479003 ft
-    //float Diameter = 0.479003;
-    //float Speed;
-
-
     while(1){ // Main while loop
 
-
-     //Run timer to get revolutions per 10 seconds
-
-     //Do math to get linear speed
-
-     //Convert to mph
-
-     //Send to Bluetooth IC
-
-
+        //Low power code will be here eventually
+        //For now, do nothing because yeet.
     }
 }
 
@@ -124,33 +115,37 @@ void pin_setup(void){
 
     P5->SEL0 |= 0x04; // '11' pin functionality
     P5->SEL1 |= 0x04;
-
     P5->DIR |= BIT5; // output for P5.5
+
+    // Timer
+    P7->SEL1 &= ~BIT7; //Change pin functionality to TIMERA1
+    P7->SEL0 |= BIT7;  //A1.1 output pin
+    P7->DIR |= BIT7;   //Actual Output
+
     return;
 }
 
 //========================================================================================================//
 /*
  * Name: Interrupt handler
- * Description: handles the interrupt
+ * Description: handles the interrupt for the IR sensor
  * Inputs: NA
  * Output: NA
  */
 //========================================================================================================//
 void ADC14_IRQHandler(void){
-int val; // tmp variable - really not necessary
-val = ADC14->MEM[5];
-ADC14->CLRIFGR0 |= 0x00000020; // clr flg
-// need to put print in ISR otherwise it never
-// gets a chance to run
-if(val <= 300 ){
-    P5->OUT |= BIT5;
-}
-else{
-    P5->OUT &= ~BIT5;
-}
-
-return;
+    int val; // tmp variable - really not necessary
+    val = ADC14->MEM[5];
+    ADC14->CLRIFGR0 |= 0x00000020; // clr flg
+    // need to put print in ISR otherwise it never
+    // gets a chance to run
+    if(val <= 300 ){
+        // increment the number of revolutions that were measured.
+        Revolutions++;
+    }
+    else{
+        //Do Nothing
+    }
 }
 
 //========================================================================================================//
@@ -180,10 +175,39 @@ return;
 //========================================================================================================//
 void initTimer(void){
     //Set up SMCLK (12,000,000), Set mode to UpDown, Clear timer, Set ID bit to 1
-    TIMER_A0->CTL |= TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UPDOWN | TIMER_A_CTL_CLR |TIMER_A_CTL_ID__1;
-    //Set EX Bit to 1 to have the N value = 1 since we want the biggest value
-    TIMER_A0->EX0 |= TIMER_A_EX0_IDEX__1;
-    TIMER_A0->CCTL[1] |= 0xC0; //Set output mode to toggle/set
-    TIMER_A0-> CCR[0] = 3427;  //Set Top value
+    TIMER_A1->CTL |= TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UP | TIMER_A_CTL_CLR |TIMER_A_CTL_ID__8;
+    //Set EX Bit to 8 to have the N value = 8
+    TIMER_A1->EX0 |= TIMER_A_EX0_IDEX__8;
+
+    //Set output mode to toggle and enable interrupt
+    TIMER_A1->CCTL[1] |= TIMER_A_CCTLN_OUTMOD_4 | TIMER_A_ACCTLN_CCIE;
+
+    //Set Top value 1Hz square wave
+    TIMER_A1-> CCR[0] = 46875;
+    TIMER_A1-> CCR[1] = 46875;
+
+    NVIC->ISER[0] |= 0b100000000000; //Interrupt Enable
 }
 
+//========================================================================================================//
+/*
+ * Name: void TA1_N_IRQHandler(void)
+ * Description: Every second, we must read in the rps, convert to mph, and send that to the watch
+ *              via Bluetooth.
+ * Inputs: NA
+ * Output: NA
+ */
+//========================================================================================================//
+void TA1_N_IRQHandler(void){
+    RPM   = Revolutions*60*pi*Diameter; // calculates RPM
+    Speed = RPM*60/5280;                // calculates Speed
+
+    //call Zach's function to send the speed to the display
+    SendToDisplay(Speed);
+
+    //Reset the revolutions variable
+    Revolutions = 0;
+
+    //Clear Flag
+    clear = TIMER_A1->IV;
+}
