@@ -10,6 +10,7 @@
 #include "msp432.h"
 #include "msoe_lib_all.h"
 
+
 // Function Prototypes
 void adc_setup(void);
 void pin_setup(void);
@@ -22,6 +23,8 @@ float Speed = 0;
 float RPM = 0;
 // Diameter = 146mm or 0.479003 ft
 float Diameter = 0.479003;
+float pi = 3.14159262;
+int clear = 0;
 
 void main(void){
 
@@ -180,7 +183,7 @@ void initTimer(void){
     TIMER_A1->EX0 |= TIMER_A_EX0_IDEX__8;
 
     //Set output mode to toggle and enable interrupt
-    TIMER_A1->CCTL[1] |= TIMER_A_CCTLN_OUTMOD_4 | TIMER_A_ACCTLN_CCIE;
+    TIMER_A1->CCTL[1] |= TIMER_A_CCTLN_OUTMOD_4 | TIMER_A_CCTLN_CCIE;
 
     //Set Top value 1Hz square wave
     TIMER_A1-> CCR[0] = 46875;
@@ -203,7 +206,7 @@ void TA1_N_IRQHandler(void){
     Speed = RPM*60/5280;                // calculates Speed
 
     //call Zach's function to send the speed to the display
-    SendToDisplay(Speed);
+    //SendToDisplay(Speed);
 
     //Reset the revolutions variable
     Revolutions = 0;
