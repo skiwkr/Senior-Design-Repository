@@ -319,3 +319,67 @@ Caused by: java.lang.IllegalArgumentException:
 
 !ENTRY org.eclipse.cdt.core 1 0 2019-10-21 12:30:39.064
 !MESSAGE Indexed 'IR_Sensor_Testing_V2' (3 sources, 18 headers) in 1.24 sec: 1,411 declarations; 3,106 references; 1 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+!SESSION 2019-10-29 08:23:38.941 -----------------------------------------------
+eclipse.buildId=4.8.0.I20180611-0500
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-10-29 08:23:55.454
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.ti.common.core 1 0 2019-10-29 08:23:55.523
+!MESSAGE path=ccs_base/DebugServer
+
+!ENTRY com.ti.common.core 1 0 2019-10-29 08:23:55.524
+!MESSAGE debugServerDir=C:/ti/ccs910/ccs/ccs_base/DebugServer
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-10-29 08:24:03.778
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-10-29 08:24:03.810
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-10-29 08:24:03.812
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY com.ti.ccstudio.ui 1 0 2019-10-29 08:24:08.119
+!MESSAGE CCS IDE session started!
+	CCS build: 9.1.0.00010
+	CCS location: C:/ti/ccs910/ccs
+	Workspace location: C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2019-10-29 08:24:08.348
+!MESSAGE constructor
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2019-10-29 08:24:08.349
+!MESSAGE done with directories
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2019-10-29 08:24:08.350
+!MESSAGE loading ti_logger
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2019-10-29 08:24:08.352
+!MESSAGE Platform os: win32
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2019-10-29 08:24:08.353
+!MESSAGE loading cToolsIF
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2019-10-29 08:24:08.360
+!MESSAGE loading cTools
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2019-10-29 08:24:08.364
+!MESSAGE loading TraceFactory
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2019-10-29 08:24:08.368
+!MESSAGE loading sqlite3
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2019-10-29 08:24:08.371
+!MESSAGE loading CloudTrace
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2019-10-29 08:24:08.388
+!MESSAGE CloudTrace interface loaded
+
+!ENTRY org.eclipse.cdt.core 1 0 2019-10-29 08:24:25.530
+!MESSAGE Indexed 'MSOE_LIB' (8 sources, 11 headers) in 0.937 sec: 366 declarations; 944 references; 20 unresolved inclusions; 0 syntax errors; 666 unresolved names (34%)
