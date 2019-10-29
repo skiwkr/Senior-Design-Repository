@@ -21,12 +21,13 @@ main.obj: C:/ti/ccs910/ccs/ccs_base/arm/include/CMSIS/core_cm4.h
 main.obj: C:/ti/ccs910/ccs/ccs_base/arm/include/CMSIS/cmsis_compiler.h
 main.obj: C:/ti/ccs910/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h
 main.obj: C:/ti/ccs910/ccs/ccs_base/arm/include/system_msp432p401r.h
-main.obj: C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_all.h
-main.obj: C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_clk.h
-main.obj: C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_lcd.h
-main.obj: C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_lcd_char.h
-main.obj: C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_delay.h
-main.obj: C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_misc.h
+main.obj: C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_all.h
+main.obj: C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_clk.h
+main.obj: C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_lcd.h
+main.obj: C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_lcd_char.h
+main.obj: C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_delay.h
+main.obj: C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_misc.h
+main.obj: ../functions.h
 main.obj: ../SevenSegment.h
 
 ../main.c: 
@@ -50,10 +51,11 @@ C:/ti/ccs910/ccs/ccs_base/arm/include/CMSIS/core_cm4.h:
 C:/ti/ccs910/ccs/ccs_base/arm/include/CMSIS/cmsis_compiler.h: 
 C:/ti/ccs910/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h: 
 C:/ti/ccs910/ccs/ccs_base/arm/include/system_msp432p401r.h: 
-C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_all.h: 
-C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_clk.h: 
-C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_lcd.h: 
-C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_lcd_char.h: 
-C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_delay.h: 
-C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_misc.h: 
+C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_all.h: 
+C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_clk.h: 
+C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_lcd.h: 
+C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_lcd_char.h: 
+C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_delay.h: 
+C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/msoe_lib_misc.h: 
+../functions.h: 
 ../SevenSegment.h: 

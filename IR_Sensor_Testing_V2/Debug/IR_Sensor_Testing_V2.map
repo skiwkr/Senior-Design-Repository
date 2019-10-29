@@ -1,7 +1,7 @@
 ******************************************************************************
                   TI ARM Linker PC v18.12.2                    
 ******************************************************************************
->> Linked Mon Oct 28 14:30:57 2019
+>> Linked Tue Oct 29 08:28:28 2019
 
 OUTPUT FILE NAME:   <IR_Sensor_Testing_V2.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00000b49
@@ -83,7 +83,7 @@ MODULE SUMMARY
     +--+-----------------------------+------+---------+---------+
        Total:                        1734   228       136    
                                                              
-    C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/Debug/MSOE_LIB.lib
+    C:/Users/blockjm/Documents/JaredsBranch/Senior-Design-Repository/MSOE_LIB/Debug/MSOE_LIB.lib
        msoe_lib_clk.obj              612    0         0      
     +--+-----------------------------+------+---------+---------+
        Total:                        612    0         0      
@@ -150,10 +150,10 @@ address   name
 00000b97  FLCTL_IRQHandler              
 00000b97  FPU_IRQHandler                
 00000b97  HardFault_Handler             
-00000169  InitPins                      
+000002e7  InitPins                      
 00000b97  MemManage_Handler             
 00000b97  NMI_Handler                   
-000002fb  NVIC_setup                    
+00000213  NVIC_setup                    
 20000000  NumToBin                      
 00000b97  PCM_IRQHandler                
 00000b97  PORT1_IRQHandler              
@@ -161,8 +161,8 @@ address   name
 00000b97  PORT3_IRQHandler              
 00000b97  PORT4_IRQHandler              
 00000b97  PORT5_IRQHandler              
-000002c7  PORT6_IRQHandler              
-000002c7  PORT6_IRQHandler              
+00000317  PORT6_IRQHandler              
+00000317  PORT6_IRQHandler              
 00000b97  PSS_IRQHandler                
 00000b97  PendSV_Handler                
 20000030  RPM                           
@@ -170,7 +170,7 @@ address   name
 00000b8b  Reset_Handler                 
 20000028  Revolutions                   
 00000b97  SVC_Handler                   
-000000e5  SendToDisplay                 
+00000263  SendToDisplay                 
 2000002c  Speed                         
 00000b97  SysTick_Handler               
 20000040  SystemCoreClock               
@@ -217,12 +217,12 @@ UNDEFED   _system_post_cinit
 00000b9d  abort                         
 ffffffff  binit                         
 2000003c  clear                         
-00000311  initTimer                     
+00000229  initTimer                     
 00000000  interruptVectors              
-0000016b  main                          
+000002e9  main                          
 00000a01  memcpy                        
 20000038  pi                            
-00000199  pin_setup                     
+000000e5  pin_setup                     
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -231,15 +231,15 @@ address   name
 -------   ----                          
 00000000  __TI_static_base__            
 00000000  interruptVectors              
-000000e5  SendToDisplay                 
-00000169  InitPins                      
-0000016b  main                          
-00000199  pin_setup                     
+000000e5  pin_setup                     
 00000200  __STACK_SIZE                  
-000002c7  PORT6_IRQHandler              
-000002c7  PORT6_IRQHandler              
-000002fb  NVIC_setup                    
-00000311  initTimer                     
+00000213  NVIC_setup                    
+00000229  initTimer                     
+00000263  SendToDisplay                 
+000002e7  InitPins                      
+000002e9  main                          
+00000317  PORT6_IRQHandler              
+00000317  PORT6_IRQHandler              
 0000034b  TA1_N_IRQHandler              
 0000034b  TA1_N_IRQHandler              
 00000469  SystemCoreClockUpdate         
