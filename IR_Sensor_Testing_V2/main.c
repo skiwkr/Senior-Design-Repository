@@ -9,10 +9,10 @@
 #include <stdio.h>
 #include "msp432.h"
 #include "msoe_lib_all.h"
+#include "SevenSegment.h"
 
 
 // Function Prototypes
-void adc_setup(void);
 void pin_setup(void);
 void NVIC_setup(void);
 void initTimer(void);
@@ -33,15 +33,15 @@ void main(void){
 
     // Setup Function Calls
     pin_setup();
-    adc_setup();
     initTimer();
     NVIC_setup();
 
+    P5->OUT = 0b00000000;
+    P6->OUT &= ~BIT1;
+
+
     // Need to enable interrupts before program starts
     _enable_interrupts();
-
-    // Start sampling/conversion
-    ADC14->CTL0 |= 0x00000001; // start conversion
 
     //Local Variables
 
@@ -49,41 +49,8 @@ void main(void){
 
         //Low power code will be here eventually
         //For now, do nothing because yeet.
-    }
-}
 
-//========================================================================================================//
-/*
- * Name: void adc_setup(void)
- * Description: Sets up the ADC for use with ADC14
- * Inputs: NA
- * Output: NA
- */
-//========================================================================================================//
-void adc_setup(void){
-    // using - A3 = P5.2
-    //
-    // keep enable low while making changes
-    //
-    // ctrl0
-    // /4 sc_bit timer no_inv /1 mod rptS x xxxx 16x cont xx on xx enb scb
-    // 01 000 1 0 000 000 10 0 0000 0010 1 00 1 00 0 0
-    ADC14->CTL0 = 0x44040290;
-    // ctrl1
-    // xxxx no_sel x mem5 xxxxxxxxxx 12b unsigned on reg
-    // 0000 000000 0 00101 0000000000 10 0 0 00
-    ADC14->CTL1 = 0x00050020;
-    // mctl[5] - since using mem5
-    // xxxx xxxx xxxx xxxx x enb diffb x AVCC x xx A3
-    // 0000 0000 0000 0000 0 0 0 0 0000 0 00 00011
-    ADC14->MCTL[5] = 0x00000003;
-    // ier0 - enable interrupts on channel 5
-    // 0000 0000 0000 0000 0000 0000 0010 0000
-    ADC14->IER0 |= 0x00000020;
-    // all others default
-    // set enable
-    ADC14->CTL0 |= 0x00000002;
-    return;
+    }
 }
 
 //========================================================================================================//
@@ -103,10 +70,11 @@ void pin_setup(void){
     P2->DIR |= 0xFF;  P2->OUT = 0;
     P3->DIR |= 0xFF;  P3->OUT = 0;
     P4->DIR |= 0xFF;  P4->OUT = 0;
-    P5->DIR |= 0xFF;
+    P5->DIR |= 0xFF;  P5->OUT = 0;
     P6->DIR |= 0xFF;  P6->OUT = 0;
     P7->DIR |= 0xFF;  P7->OUT = 0;
     P8->DIR |= 0xFF;  P8->OUT = 0;
+    P9->DIR |= 0xFF;  P9->OUT = 0;
     P10->DIR |= 0xFF; P10->OUT = 0;
 
     P7->DIR |=  BIT7;
@@ -115,15 +83,24 @@ void pin_setup(void){
     P2->OUT &= ~0b111;
 
     // Setting used pins to corresponding values
-
-    P5->SEL0 |= 0x04; // '11' pin functionality
-    P5->SEL1 |= 0x04;
+    // ADC functionality, no longer using
+    //P5->SEL0 |= 0x04; // '11' pin functionality
+    //P5->SEL1 |= 0x04;
     P5->DIR |= BIT5; // output for P5.5
 
     // Timer
     P7->SEL1 &= ~BIT7; //Change pin functionality to TIMERA1
     P7->SEL0 |= BIT7;  //A1.1 output pin
     P7->DIR |= BIT7;   //Actual Output
+
+    // Input pin for IR receiver
+    P6->SEL0 &= ~BIT0;
+    P6->SEL1 &= ~BIT0;
+
+    P6->DIR &= ~BIT(1); //Sets P6 BIT1 to an input
+    P6->IES |= (BIT1);             // Falling edge interrupt maybe
+    P6->IE |= BIT1;                 //Interrupt Enable
+    NVIC->ISER[1] |= BIT(PORT6_IRQn-32); //enable for 6 interrupt
 
     return;
 }
@@ -136,18 +113,12 @@ void pin_setup(void){
  * Output: NA
  */
 //========================================================================================================//
-void ADC14_IRQHandler(void){
-    int val; // tmp variable - really not necessary
-    val = ADC14->MEM[5];
-    ADC14->CLRIFGR0 |= 0x00000020; // clr flg
-    // need to put print in ISR otherwise it never
-    // gets a chance to run
-    if(val <= 300 ){
-        // increment the number of revolutions that were measured.
-        Revolutions++;
-    }
-    else{
-        //Do Nothing
+void PORT6_IRQHandler(void){
+    int val; // tmp variable
+    val = P6->IV;
+    if(val |= 0x04 ){      // if P6.1 is reading a value of 1
+        P5->OUT ^= BIT5;
+        Revolutions++;     // increment the number of revolutions that were measured.
     }
 }
 
@@ -202,11 +173,11 @@ void initTimer(void){
  */
 //========================================================================================================//
 void TA1_N_IRQHandler(void){
-    RPM   = Revolutions*60*pi*Diameter; // calculates RPM
-    Speed = RPM*60/5280;                // calculates Speed
+    RPM   = Revolutions*60*pi*Diameter; // calculates RPM in feet/minute
+    Speed = RPM*60/5280;                // calculates Speed in MPH
 
     //call Zach's function to send the speed to the display
-    //SendToDisplay(Speed);
+    SendToDisplay(Speed);
 
     //Reset the revolutions variable
     Revolutions = 0;

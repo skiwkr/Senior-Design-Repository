@@ -27,6 +27,7 @@ main.obj: C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB
 main.obj: C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_lcd_char.h
 main.obj: C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_delay.h
 main.obj: C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_misc.h
+main.obj: ../SevenSegment.h
 
 ../main.c: 
 C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/stdio.h: 
@@ -55,3 +56,4 @@ C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_
 C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_lcd_char.h: 
 C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_delay.h: 
 C:/Users/blockjm/Documents/Workspace/Senior-Design-Repository/MSOE_LIB/msoe_lib_misc.h: 
+../SevenSegment.h: 
