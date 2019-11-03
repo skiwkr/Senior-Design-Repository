@@ -26,6 +26,11 @@ float RPM = 0;
 float Diameter = 0.479003;
 float pi = 3.14159262;
 int clear = 0;
+float circ = 1.047; //Circumference in feet
+float RevPerMi = 5042.029;
+// Variable for number of ms
+int mili = 0;
+
 
 void main(void){
 
@@ -51,6 +56,7 @@ void main(void){
         //Low power code will be here eventually
         //For now, do nothing because yeet.
 
+
     }
 }
 
@@ -65,10 +71,20 @@ void main(void){
 void PORT6_IRQHandler(void){
     int val; // tmp variable
     val = P6->IV;
-    if(val |= 0x04 ){      // if P6.1 is reading a value of 1
-        P5->OUT ^= BIT5;
-        Revolutions++;     // increment the number of revolutions that were measured.
-    }
+    if(~(val | ~BIT1) == BIT1){      // if P6.1 is reading a value of 0
+
+        float currentMili;
+        currentMili = mili+1;
+
+        Speed = (1/(currentMili*0.0014008))*2;
+
+        SendToDisplay(Speed);
+
+        mili = 0;
+
+        P5->OUT ^= BIT5;   // toggle
+        //Revolutions++;     // increment the number of revolutions that were measured.
+       }
 }
 
 //========================================================================================================//
@@ -81,7 +97,10 @@ void PORT6_IRQHandler(void){
  */
 //========================================================================================================//
 void TA1_N_IRQHandler(void){
-    RPM   = Revolutions*60*pi*Diameter; // calculates RPM in feet/minute
+
+    mili++;
+
+    /*RPM   = Revolutions*60*pi*Diameter; // calculates RPM in feet/minute
     Speed = RPM*60/5280;                // calculates Speed in MPH
 
     //call Zach's function to send the speed to the display
@@ -89,6 +108,7 @@ void TA1_N_IRQHandler(void){
 
     //Reset the revolutions variable
     Revolutions = 0;
+    */
 
     //Clear Flag
     clear = TIMER_A1->IV;

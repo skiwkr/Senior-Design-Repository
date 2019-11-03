@@ -86,19 +86,29 @@ return;
  */
 //========================================================================================================//
 void initTimer(void){
+
+
     //Set up SMCLK (12,000,000), Set mode to UpDown, Clear timer, Set ID bit to 1
-    TIMER_A1->CTL |= TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UP | TIMER_A_CTL_CLR |TIMER_A_CTL_ID__8;
+    TIMER_A1->CTL |= TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UP | TIMER_A_CTL_CLR | TIMER_A_CTL_ID__1;
     //Set EX Bit to 8 to have the N value = 8
-    TIMER_A1->EX0 |= TIMER_A_EX0_IDEX__8;
+    TIMER_A1->EX0 |= TIMER_A_EX0_IDEX__1;
 
     //Set output mode to toggle and enable interrupt
     TIMER_A1->CCTL[1] |= TIMER_A_CCTLN_OUTMOD_4 | TIMER_A_CCTLN_CCIE;
 
     //Set Top value 1Hz square wave
-    TIMER_A1-> CCR[0] = 46875;
-    TIMER_A1-> CCR[1] = 46875;
+    //TIMER_A1-> CCR[0] = 15999;
+    //TIMER_A1-> CCR[1] = 15999;
+
+    TIMER_A1-> CCR[0] = 5999;
+    TIMER_A1-> CCR[1] = 5999;
+
+    //P7->SEL1 &= ~BIT7; //Change pin functionallity to TIMERA1
+    //P7->SEL0 |= BIT7;  //A1.1 output pin
+    //P7->DIR |= BIT7;   //Actual Output
 
     NVIC->ISER[0] |= 0b100000000000; //Interrupt Enable
+    NVIC->ISER[0] |= NVIC_IPR4_PRI_16_OFS;
 }
 
 
